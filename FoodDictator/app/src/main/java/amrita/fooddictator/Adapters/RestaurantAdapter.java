@@ -1,6 +1,8 @@
 package amrita.fooddictator.Adapters;
 
 import android.content.Context;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,14 +36,14 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 
         View rowView = inflater.inflate(R.layout.list_restaurants, parent, false);
         TextView nameView = (TextView) rowView.findViewById(R.id.restaurant_name);
+        nameView.setText(recommendedRestaurants.get(position).getName());
         TextView addressView = (TextView) rowView.findViewById(R.id.restaurant_address);
         TextView categoryView = (TextView) rowView.findViewById(R.id.restaurant_category);
         TextView yelpRatingView = (TextView) rowView.findViewById(R.id.yelp_rating);
         TextView phoneNumberView = (TextView) rowView.findViewById(R.id.restaurant_phone);
-        nameView.setText(recommendedRestaurants.get(position).getName());
         addressView.setText(String.valueOf(recommendedRestaurants.get(position).getAddress()));
         categoryView.setText(recommendedRestaurants.get(position).getCategory());
-        String yelpRating = String.format("%s %f", yelpRatingView.getText().toString(),
+        String yelpRating = String.format("%s %.1f", yelpRatingView.getText().toString(),
                 recommendedRestaurants.get(position).getRating());
         yelpRatingView.setText(yelpRating);
         phoneNumberView.setText(recommendedRestaurants.get(position).getPhoneNumber());

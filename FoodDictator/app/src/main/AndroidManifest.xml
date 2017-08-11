@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".RecommendationActivity">
         </activity>
+        <activity android:name=".WebViewActivity">
+        </activity>
     </application>
 
 </manifest>
