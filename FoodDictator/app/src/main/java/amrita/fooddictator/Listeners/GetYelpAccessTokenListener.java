@@ -5,7 +5,7 @@ package amrita.fooddictator.Listeners;
  */
 
 public interface GetYelpAccessTokenListener {
-    void getYelpAccessToken(String token, Long expires);
+    void getYelpAccessToken(String token, int expiresIn);
 }
 
 

@@ -13,13 +13,15 @@ import amrita.fooddictator.Config;
 import amrita.fooddictator.Listeners.GetYelpAccessTokenListener;
 import cz.msebera.android.httpclient.Header;
 
+import static amrita.fooddictator.Config.YELP_ACCESS_TOKEN_EXPIRY_THRESHOLD;
+
 /**
  * Created by amritachowdhury on 8/9/17.
  */
 
 public class YelpAccessTokenAPI {
     public static String yelpAccessToken;
-    public static long yelpAccessTokenExpiry = 0;
+    public static int yelpAccessTokenExpiry;
     private static final String accessTokenUrl = "oauth2/token";
 
 
@@ -32,6 +34,7 @@ public class YelpAccessTokenAPI {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     yelpAccessToken = response.getString("access_token");
+                    yelpAccessTokenExpiry = response.getInt("expires_in");
                     listener.getYelpAccessToken(yelpAccessToken, yelpAccessTokenExpiry);
                 } catch (Exception e) {
                     Log.e("bapi", e.getMessage());
@@ -58,8 +61,9 @@ public class YelpAccessTokenAPI {
         });
     }
 
-    public boolean isAccessTokenValid(String token, Long expires) {
-        if (token == null || token.isEmpty()) {
+    public boolean isAccessTokenValid(String token, int expiresIn, long createdAt) {
+        if (token == null || token.isEmpty() || expiresIn == 0 ||
+                createdAt > expiresIn - YELP_ACCESS_TOKEN_EXPIRY_THRESHOLD) {
             return false;
         }
         return true;

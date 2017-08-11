@@ -121,14 +121,17 @@ public class RecommendRestaurant {
         try {
             final SharedPreferences myPrefs = activity.getSharedPreferences("yelpAccessKey", MODE_PRIVATE );
             String yelpAccessToken = myPrefs.getString("token", null);
-            Long yelpAccessTokenExpiry = myPrefs.getLong("expires",0);
-            if (!this.tokenAPI.isAccessTokenValid(yelpAccessToken, yelpAccessTokenExpiry)) {
+            int yelpAccessTokenExpiry = myPrefs.getInt("expires_in",0);
+            long createdAt = myPrefs.getInt("created_at",0);
+            if (!this.tokenAPI.isAccessTokenValid(yelpAccessToken, yelpAccessTokenExpiry, createdAt)) {
                 this.tokenAPI.requestAccessTokenFromApi(new GetYelpAccessTokenListener() {
                     @Override
-                    public void getYelpAccessToken(String token, Long expires) {
+                    public void getYelpAccessToken(String token, int expiresIn) {
+                        long currentTimeInSeconds = System.currentTimeMillis()/1000;
                         SharedPreferences.Editor e = myPrefs.edit();
                         e.putString("token", token);
-                        e.putLong("expires", expires);
+                        e.putInt("expires_in", expiresIn);
+                        e.putLong("created_at", currentTimeInSeconds);
                         e.commit();
                         getRecommendation(foodDictator, token, location);
                     }
