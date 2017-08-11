@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_margin="50dp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/restaurant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="Hello Amrita!" />
+
+    <TextView
+        android:id="@+id/restaurant_address"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="Hello Amrita1!" />
+
+    <TextView
+        android:id="@+id/restaurant_category"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="Hello Amrita1!" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/yelp_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="Yelp Rating: " />
+
+        <TextView
+            android:id="@+id/restaurant_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="Hello Amrita111!"
+            android:layout_alignParentEnd="true"/>
+            android:layout_toRightOf="@id/yelp_rating"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

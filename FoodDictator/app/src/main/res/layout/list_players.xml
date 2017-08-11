@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_margin="30dp">
+
+    <TextView
+        android:id="@+id/player_name"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Hello Amrita!" />
+
+    <TextView
+        android:id="@+id/player_id"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/player_present"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="SELECT"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>
