@@ -39,31 +39,20 @@ public class YelpAccessTokenAPI {
                 } catch (Exception e) {
                     Log.e("bapi", e.getMessage());
                 }
-                // If the response is JSONObject instead of expected JSONArray
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-                try {
-                    JSONObject firstEvent =(JSONObject) timeline.get(0);
-                    String accessToken = firstEvent.getString("access_token");
-                    Log.e("bapi", accessToken);
-                } catch (Exception e) {
-                    Log.e("bapi", e.getMessage());
-                }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers,
-                                  String responseString, Throwable throwable) {
-                Log.e("bapi", responseString);
+                                  Throwable throwable, JSONObject errorResponse) {
+                Log.e("bapi", "oo");
             }
         });
     }
 
     public boolean isAccessTokenValid(String token, int expiresIn, long createdAt) {
+        long currentTimeInSeconds = System.currentTimeMillis()/1000;
         if (token == null || token.isEmpty() || expiresIn == 0 ||
-                createdAt > expiresIn - YELP_ACCESS_TOKEN_EXPIRY_THRESHOLD) {
+                currentTimeInSeconds > createdAt + expiresIn - YELP_ACCESS_TOKEN_EXPIRY_THRESHOLD) {
             return false;
         }
         return true;

@@ -12,15 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingBottom="20dp"
+        android:textColor="@color/colorAccent"
         android:text="Who's playing?"/>
-
-    <Button
-        android:id="@+id/winner"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="Today's Winner"
-        android:layout_gravity="center_horizontal"
-        android:onClick="onClickWinnerBtn"/>
 
     <ListView android:id="@+id/all_players"
         android:layout_height="fill_parent"

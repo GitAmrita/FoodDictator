@@ -2,6 +2,7 @@ package amrita.fooddictator.Objects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by amritachowdhury on 8/11/17.
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class LunchBuddySingleton {
     private static LunchBuddySingleton ourInstance;
+    private static String lastWinner;
 
     public String getName() {
         return name;
@@ -50,6 +52,7 @@ public class LunchBuddySingleton {
         this.allPlayers = new ArrayList<>();
         this.presentPlayers = new ArrayList<>();
         this.name = "VivLabsHackers";
+        this.lastWinner = "";
         createTeam();
     }
 
@@ -62,15 +65,29 @@ public class LunchBuddySingleton {
         Player p6 = new Player(6, "Adam Cheyer");
         Player p7 = new Player(7, "Adam Elconin");
         Player p8 = new Player(8, "Amrita Chowdhury");
+        Player p9 = new Player(9, "Andrew Roberts111");
+        Player p10 = new Player(10, "Adam Cheyer111");
+        Player p11 = new Player(11, "Adam Elconin111");
+        Player p12 = new Player(12, "Amrita Chowdhury111");
         allPlayers.add(p1); allPlayers.add(p2); allPlayers.add(p3); allPlayers.add(p4);
         allPlayers.add(p5); allPlayers.add(p6); allPlayers.add(p7); allPlayers.add(p8);
+        allPlayers.add(p9); allPlayers.add(p10); allPlayers.add(p11); allPlayers.add(p12);
     }
 
     public Player getFoodDictator() {
-        /*Random rand = new Random();
+        if (this.presentPlayers.size() == 1) {
+            lastWinner = presentPlayers.get(0).getName();
+            return this.presentPlayers.get(0);
+        }
+        Random rand = new Random();
         int randIdx = rand.nextInt(this.presentPlayers.size());
-        return this.presentPlayers.get(randIdx);*/
-        return this.allPlayers.get(0);
+        if (lastWinner.equals(presentPlayers.get(randIdx).getName())) {
+            getFoodDictator();
+        } else {
+            lastWinner = presentPlayers.get(randIdx).getName();
+        }
+        return this.presentPlayers.get(randIdx);
+       // return this.allPlayers.get(0);
     }
 
     public void addFoodDictatorRecommendation(String category, Player foodDictator) {

@@ -3,6 +3,7 @@ package amrita.fooddictator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         drawComponents();
         PlayerAdapter playerAdapter = new PlayerAdapter(this, lunchBuddySingleton.getAllPlayers());
         allPlayersList.setAdapter(playerAdapter);
+        allPlayersList.addFooterView(winnerBtn);
         allPlayersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view,
@@ -53,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private void drawComponents() {
         allPlayersList = (ListView) findViewById(R.id.all_players);
         allPlayersList.setItemsCanFocus(true);
-        winnerBtn = (Button) findViewById(R.id.winner);
+        View view = getLayoutInflater().inflate(R.layout.list_players_footer, null);
+        winnerBtn = (Button) view.findViewById(R.id.winner);
     }
 
     public void onClickWinnerBtn(View v) {

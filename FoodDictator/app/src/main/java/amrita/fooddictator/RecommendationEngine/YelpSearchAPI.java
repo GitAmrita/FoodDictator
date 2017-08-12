@@ -26,8 +26,6 @@ public class YelpSearchAPI {
     public  List<Restaurant> recommendedRestaurants = new ArrayList<>();
 
     private static final String searchUrl = "v3/businesses/search";
-    //https://api.yelp.com/v3/businesses/search?location=95051&limit=10&sort_by=rating&open_now=true&term=restaurants&categories=mexican,japanese,chinese
-
 
     public void getRestaurantsFromApi(String zipCode, int noOfResults, String sortBy,
                                       boolean isOpenNow, String searchTerm, String categories,

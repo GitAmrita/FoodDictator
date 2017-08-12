@@ -122,7 +122,7 @@ public class RecommendRestaurant {
             final SharedPreferences myPrefs = activity.getSharedPreferences("yelpAccessKey", MODE_PRIVATE );
             String yelpAccessToken = myPrefs.getString("token", null);
             int yelpAccessTokenExpiry = myPrefs.getInt("expires_in",0);
-            long createdAt = myPrefs.getInt("created_at",0);
+            long createdAt = myPrefs.getLong("created_at",0);
             if (!this.tokenAPI.isAccessTokenValid(yelpAccessToken, yelpAccessTokenExpiry, createdAt)) {
                 this.tokenAPI.requestAccessTokenFromApi(new GetYelpAccessTokenListener() {
                     @Override

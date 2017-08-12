@@ -20,10 +20,10 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
     private final Context context;
     private final List<Player> allPlayers;
 
-    public PlayerAdapter(Context context, List<Player> values) {
-        super(context, R.layout.list_players, values);
+    public PlayerAdapter(Context context, List<Player> allPlayers) {
+        super(context, R.layout.list_players, allPlayers);
         this.context = context;
-        this.allPlayers = values;
+        this.allPlayers = allPlayers;
     }
 
     @Override
@@ -37,6 +37,7 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
         TextView presentView = (TextView) rowView.findViewById(R.id.player_present);
         nameView.setText(allPlayers.get(position).getName());
         idView.setText(String.valueOf(allPlayers.get(position).getId()));
+        presentView.setText("SELECT");
         return rowView;
     }
 }
