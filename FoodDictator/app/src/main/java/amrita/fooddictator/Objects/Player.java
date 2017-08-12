@@ -39,6 +39,14 @@ public class Player implements Serializable {
         this.recommendations = recommendations;
     }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
     public void addRecommendation(String category) {
         Integer selectionFrequency = this.recommendations.get(category);
         if (selectionFrequency == null) {
@@ -50,6 +58,7 @@ public class Player implements Serializable {
 
     private int id;
     private String name;
+    private boolean isSelected;
     private Map<String, Integer> recommendations;
 
     public Player(int id, String name) {

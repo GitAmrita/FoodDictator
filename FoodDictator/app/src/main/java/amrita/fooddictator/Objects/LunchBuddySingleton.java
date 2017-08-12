@@ -108,6 +108,7 @@ public class LunchBuddySingleton {
     public Player getPlayerById(int id) {
         for (Player p : allPlayers) {
             if (p.getId() == id) {
+                p.setSelected(p.isSelected() ? false : true);
                 return p;
             }
         }

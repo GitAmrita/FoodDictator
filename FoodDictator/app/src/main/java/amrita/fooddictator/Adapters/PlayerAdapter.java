@@ -37,7 +37,7 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
         TextView presentView = (TextView) rowView.findViewById(R.id.player_present);
         nameView.setText(allPlayers.get(position).getName());
         idView.setText(String.valueOf(allPlayers.get(position).getId()));
-        presentView.setText("SELECT");
+        presentView.setText(allPlayers.get(position).isSelected() ? "SELECTED" : "SELECT");
         return rowView;
     }
 }

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView playerId = (TextView) view.findViewById(R.id.player_id);
                 Player selectedPlayer = lunchBuddySingleton.getPlayerById(
                         Integer.parseInt(playerId.getText().toString()));
-                if (presentPlayer.getText().toString().equals("SELECT")) {
+                if (selectedPlayer.isSelected()) {
                     presentPlayer.setText("SELECTED");
                     lunchBuddySingleton.addPresentPlayer(selectedPlayer);
                 } else {
