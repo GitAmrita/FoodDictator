@@ -1,9 +1,4 @@
 # FoodDictator
-Food dictator is an app which allows one to select the players to play a game of "Who's the food dictator for today's lunch".
-Once the players are selected, the app generates the food dictator of the day. (Home Screen)
-The dictator is asked to enter the location (zip/ city) where he wants to have lunch. Based on the location and the dictators previous restaurant picks, the app recommends a list of restaurants to select from.(2nd screen - restaurant recommendation)
-Once the dictator clicks on the restaurant, a google map opens up for navigation.(3rd screen - google maps for the restaurant selected)
-Once the user clicks the hardware back button, the game is reset.
 
 # Recommendation Logic
 Each player in the app has a list of previously visited restaurant cuisine types which is initially empty. When a player is selected as the food dictator, he picks a restaurant from the recommended list. This adds the cuisine type to the list of previously visited restaurant cuisine types. 
@@ -11,7 +6,7 @@ The recommendation is done through Yelp Search api. There are following two type
 
 DEFAULT_RECOMMENDATION: This happens when the player has no previously visited restaurants. The search api returns a           list of different cuisine type restaurants. Number of results returned is NUMBER_OF_DEFAULT_RESTAURANT_RESULTS.
       
-CUSTOM_RECOMMENDATION: This happens when the player has atleast one previously visited restaurant. For simplicity the         app considers only the top 3 restaurant cuisine visited by the player. The search api returns a list of restaurants           which belong to the specified cuisines. The number of such results is NUMBER_OF_CUSTOM_RESTAURANT_RESULTS. In addition         to that the engine also recommends some restaurants which belong to other cuisine types. Number of such recommendations       is NUMBER_OF_DEFAULT_RESTAURANT_RESULTS - NUMBER_OF_CUSTOM_RESTAURANT_RESULTS. AS a result, the player doesn't only get       recommended restaurants based on his previous choices.
+CUSTOM_RECOMMENDATION: This happens when the player has atleast one previously visited restaurant. For simplicity the         app considers the cuisine of only the top 3 restaurants visited by the player. The search api returns a list of restaurants           which belong to the specified cuisines. The number of such results is NUMBER_OF_CUSTOM_RESTAURANT_RESULTS. In addition         to that the engine also recommends some restaurants which belong to other cuisine types. Number of such recommendations       is NUMBER_OF_DEFAULT_RESTAURANT_RESULTS - NUMBER_OF_CUSTOM_RESTAURANT_RESULTS. AS a result, the player doesn't only get       recommended restaurants based on his previous choices.
     
 # App Design
 Since the app doesn't have any datasource, all actions are in memory. That means the persistent list of players to select from is stored in memory and is recreated every time the app is started.
