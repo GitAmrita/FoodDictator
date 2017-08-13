@@ -43,6 +43,8 @@ public class RecommendRestaurant {
     public YelpSearchAPI searchAPI;
     List<Restaurant> recommendedRestaurants;
 
+    public final String TAG = this.getClass().getName();
+
     public RecommendRestaurant(RecommendationActivity activity) {
         try {
             this.activity = activity;
@@ -50,7 +52,7 @@ public class RecommendRestaurant {
             this.searchAPI = new YelpSearchAPI();
             this.recommendedRestaurants = new ArrayList<>();
         } catch (Exception e) {
-            Log.e("bapi", e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
     }
 
@@ -68,16 +70,12 @@ public class RecommendRestaurant {
                 getDefaultRecommendation(accessToken, location,
                         Config.NUMBER_OF_DEFAULT_RESTAURANT_RESULTS);
             } else {
-                int noOfDefaultResults = Config.NUMBER_OF_DEFAULT_RESTAURANT_RESULTS -
-                        Config.NUMBER_OF_CUSTOM_RESTAURANT_RESULTS;
                 getCustomRecommendation(categories, accessToken, location,
                         Config.NUMBER_OF_CUSTOM_RESTAURANT_RESULTS);
-                getDefaultRecommendation(accessToken, location, noOfDefaultResults);
             }
         } catch (Exception e) {
-            Log.e("bapi", e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
-
     }
 
     private String createRecommendationCategory(Player foodDictator) {
@@ -109,23 +107,26 @@ public class RecommendRestaurant {
                         }
                     });
         } catch (Exception e) {
-            Log.e("bapi", e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
     }
 
     private void getCustomRecommendation(String categories, final String accessToken,
-                                         String location, int noOfResults) {
+                                         final String location, int noOfResults) {
         try {
             searchAPI.getRestaurantsFromApi(location, noOfResults,
                     Config.DEFAULT_SORT_BY_RESTAURANTS, true, Config.DEFAULT_SEARCH_TERM,
                     categories, accessToken, new GetYelpRestaurantRecommendationListener() {
                         @Override
                         public void getYelpRestaurantRecommendation(List<Restaurant> restaurants) {
+                            int noOfDefaultResults = Config.NUMBER_OF_DEFAULT_RESTAURANT_RESULTS -
+                                    Config.NUMBER_OF_CUSTOM_RESTAURANT_RESULTS;
                             recommendedRestaurants.addAll(restaurants);
+                            getDefaultRecommendation(accessToken, location, noOfDefaultResults);
                         }
                     });
         } catch (Exception e) {
-            Log.e("bapi", e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
     }
 
@@ -153,7 +154,7 @@ public class RecommendRestaurant {
             }
 
         } catch (Exception e) {
-            Log.e("bapi", e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
     }
 }

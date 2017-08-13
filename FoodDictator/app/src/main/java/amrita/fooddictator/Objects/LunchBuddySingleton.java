@@ -63,13 +63,9 @@ public class LunchBuddySingleton {
         Player p6 = new Player(6, "Adam Cheyer");
         Player p7 = new Player(7, "Adam Elconin");
         Player p8 = new Player(8, "Amrita Chowdhury");
-        Player p9 = new Player(9, "Andrew Roberts111");
-        Player p10 = new Player(10, "Adam Cheyer111");
-        Player p11 = new Player(11, "Adam Elconin111");
-        Player p12 = new Player(12, "Amrita Chowdhury111");
+
         allPlayers.add(p1); allPlayers.add(p2); allPlayers.add(p3); allPlayers.add(p4);
         allPlayers.add(p5); allPlayers.add(p6); allPlayers.add(p7); allPlayers.add(p8);
-        allPlayers.add(p9); allPlayers.add(p10); allPlayers.add(p11); allPlayers.add(p12);
     }
 
     public Player getFoodDictator() {

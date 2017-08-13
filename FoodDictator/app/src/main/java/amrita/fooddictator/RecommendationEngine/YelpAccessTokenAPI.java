@@ -30,6 +30,7 @@ public class YelpAccessTokenAPI {
     public static int yelpAccessTokenExpiry;
     private static final String accessTokenUrl = "oauth2/token";
 
+    public final String TAG = this.getClass().getName();
 
     public void requestAccessTokenFromApi(final GetYelpAccessTokenListener listener) throws JSONException {
         RequestParams params = new RequestParams();
@@ -43,14 +44,14 @@ public class YelpAccessTokenAPI {
                     yelpAccessTokenExpiry = response.getInt("expires_in");
                     listener.getYelpAccessToken(yelpAccessToken, yelpAccessTokenExpiry);
                 } catch (Exception e) {
-                    Log.e("bapi", e.getMessage());
+                    Log.e(TAG, e.getMessage());
                 }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers,
                                   Throwable throwable, JSONObject errorResponse) {
-                Log.e("bapi", "oo");
+                Log.e(TAG, errorResponse.toString());
             }
         });
     }

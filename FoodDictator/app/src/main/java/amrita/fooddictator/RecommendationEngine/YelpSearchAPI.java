@@ -27,6 +27,8 @@ import cz.msebera.android.httpclient.message.BasicHeader;
 * */
 
 public class YelpSearchAPI {
+    public final String TAG = this.getClass().getName();
+
     public  List<Restaurant> recommendedRestaurants = new ArrayList<>();
 
     private static final String searchUrl = "v3/businesses/search";
@@ -45,14 +47,14 @@ public class YelpSearchAPI {
                     recommendedRestaurants = restaurantParser(response);
                     listener.getYelpRestaurantRecommendation(recommendedRestaurants);
                 } catch (Exception e) {
-                    Log.e("bapi", e.getMessage());
+                    Log.e(TAG, e.getMessage());
                 }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers,
                                   Throwable throwable, JSONObject errorResponse) {
-                Log.e("bapi", "oo");
+                Log.e(TAG, errorResponse.toString());
             }
         });
     }
