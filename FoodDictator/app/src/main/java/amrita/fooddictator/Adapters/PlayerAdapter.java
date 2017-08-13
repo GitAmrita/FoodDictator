@@ -16,6 +16,10 @@ import amrita.fooddictator.R;
  * Created by amritachowdhury on 8/9/17.
  */
 
+/* Functionalities:
+1. Adapter for list of the persistent list of players.
+* */
+
 public class PlayerAdapter extends ArrayAdapter<Player> {
     private final Context context;
     private final List<Player> allPlayers;

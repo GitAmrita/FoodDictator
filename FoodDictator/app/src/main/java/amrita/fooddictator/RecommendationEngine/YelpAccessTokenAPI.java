@@ -19,6 +19,12 @@ import static amrita.fooddictator.Config.YELP_ACCESS_TOKEN_EXPIRY_THRESHOLD;
  * Created by amritachowdhury on 8/9/17.
  */
 
+/*
+* Functionalities
+* 1. Gets the access token from yelp, to make further calls to yelp V3 REST api
+* 2. Validates the saved token since yelp token typically expire by certain time.
+* */
+
 public class YelpAccessTokenAPI {
     public static String yelpAccessToken;
     public static int yelpAccessTokenExpiry;
@@ -54,7 +60,7 @@ public class YelpAccessTokenAPI {
         if (token == null || token.isEmpty() || expiresIn == 0 ||
                 currentTimeInSeconds > createdAt + expiresIn - YELP_ACCESS_TOKEN_EXPIRY_THRESHOLD) {
             return false;
-        }
+        } // to be on the safe side, get new token 2 days (YELP_ACCESS_TOKEN_EXPIRY_THRESHOLD) before expiry.
         return true;
     }
 }

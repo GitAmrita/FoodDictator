@@ -1,6 +1,7 @@
 package amrita.fooddictator.Adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -17,6 +18,10 @@ import amrita.fooddictator.R;
 /**
  * Created by amritachowdhury on 8/11/17.
  */
+
+/* Functionalities:
+1. Adapter for list of recommended restaurants.
+* */
 
 public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 
@@ -37,6 +42,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
         View rowView = inflater.inflate(R.layout.list_restaurants, parent, false);
         TextView nameView = (TextView) rowView.findViewById(R.id.restaurant_name);
         nameView.setText(recommendedRestaurants.get(position).getName());
+        nameView.setPaintFlags(nameView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         TextView addressView = (TextView) rowView.findViewById(R.id.restaurant_address);
         TextView categoryView = (TextView) rowView.findViewById(R.id.restaurant_category);
         TextView yelpRatingView = (TextView) rowView.findViewById(R.id.yelp_rating);

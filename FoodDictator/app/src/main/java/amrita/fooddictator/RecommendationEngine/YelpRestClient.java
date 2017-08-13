@@ -6,6 +6,10 @@ import cz.msebera.android.httpclient.message.BasicHeader;
 /**
  * Created by amritachowdhury on 8/9/17.
  */
+/*
+* Functionalities
+* 1. REST api client from the library android-async-http:1.4.9
+* */
 
 public class YelpRestClient {
     private static final String BASE_URL = "https://api.yelp.com/";

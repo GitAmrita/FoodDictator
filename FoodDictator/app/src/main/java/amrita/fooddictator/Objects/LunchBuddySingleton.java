@@ -7,6 +7,14 @@ import java.util.Random;
 /**
  * Created by amritachowdhury on 8/11/17.
  */
+/* Functionalities:
+1. This class contains the persistent list of players.
+2. Generates the food Dictator from the list of present players. The dictator is selected randomly.
+The value is recalculated if it is same as the last time.
+3. This is a singleton class so that we can create only one instance of it. Since we don't have a
+data source in this project, so keeping everything in memory. If we create more than one instance, we
+will loose all players previous selections and hence the recommendation engine will perform poorly.
+* */
 
 public class LunchBuddySingleton {
     private static LunchBuddySingleton ourInstance;
@@ -30,16 +38,7 @@ public class LunchBuddySingleton {
         this.allPlayers = allPlayers;
     }
 
-    public List<Player> getPresentPlayers() {
-        return presentPlayers;
-    }
-
-    public void setPresentPlayers(List<Player> presentPlayers) {
-        this.presentPlayers = presentPlayers;
-    }
-
     private ArrayList<Player> allPlayers;
-    private List<Player> presentPlayers;
 
     public static LunchBuddySingleton getInstance() {
         if (ourInstance == null) {
@@ -50,7 +49,6 @@ public class LunchBuddySingleton {
 
     private LunchBuddySingleton() {
         this.allPlayers = new ArrayList<>();
-        this.presentPlayers = new ArrayList<>();
         this.name = "VivLabsHackers";
         this.lastWinner = "";
         createTeam();
@@ -75,19 +73,26 @@ public class LunchBuddySingleton {
     }
 
     public Player getFoodDictator() {
-        if (this.presentPlayers.size() == 1) {
+        List<Player> presentPlayers = getPresentPlayers();
+        if (presentPlayers.size() == 0) {
+            return null;
+        }
+        return getFoodDictator(presentPlayers);
+    }
+
+    private Player getFoodDictator(List<Player> presentPlayers) {
+        if (presentPlayers.size() == 1) {
             lastWinner = presentPlayers.get(0).getName();
-            return this.presentPlayers.get(0);
+            return presentPlayers.get(0);
         }
         Random rand = new Random();
-        int randIdx = rand.nextInt(this.presentPlayers.size());
+        int randIdx = rand.nextInt(presentPlayers.size());
         if (lastWinner.equals(presentPlayers.get(randIdx).getName())) {
             getFoodDictator();
         } else {
             lastWinner = presentPlayers.get(randIdx).getName();
         }
-        return this.presentPlayers.get(randIdx);
-       // return this.allPlayers.get(0);
+         return presentPlayers.get(randIdx);
     }
 
     public void addFoodDictatorRecommendation(String category, Player foodDictator) {
@@ -97,18 +102,11 @@ public class LunchBuddySingleton {
                 break;
             }
         }
-        for (Player p : presentPlayers) {
-            if (p.getId() == foodDictator.getId()) {
-                p.setRecommendations(getPlayerById(foodDictator.getId()).getRecommendations());
-                break;
-            }
-        }
     }
 
     public Player getPlayerById(int id) {
         for (Player p : allPlayers) {
             if (p.getId() == id) {
-                p.setSelected(p.isSelected() ? false : true);
                 return p;
             }
         }
@@ -116,10 +114,26 @@ public class LunchBuddySingleton {
     }
 
     public void addPresentPlayer(Player presentPlayer) {
-        this.presentPlayers.add(presentPlayer);
+        presentPlayer.setSelected(true);
     }
 
     public void removePresentPlayer(Player presentPlayer) {
-        this.presentPlayers.remove(presentPlayer);
+        presentPlayer.setSelected(false);
+    }
+
+    public void resetAllPresentPlayers() {
+        for (Player p : this.allPlayers) {
+            removePresentPlayer(p);
+        }
+    }
+
+    private List<Player> getPresentPlayers() {
+        List<Player> presentPlayers = new ArrayList<>(this.allPlayers.size());
+        for (Player p : this.allPlayers) {
+            if (p.isSelected()) {
+                presentPlayers.add(p);
+            }
+        }
+        return presentPlayers;
     }
 }

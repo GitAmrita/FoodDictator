@@ -4,6 +4,10 @@ package amrita.fooddictator.Objects;
  * Created by amritachowdhury on 8/9/17.
  */
 
+/* Functionalities:
+1. This class contains the restaurant details.
+* */
+
 public class Restaurant {
     public String getName() {
         return this.name;

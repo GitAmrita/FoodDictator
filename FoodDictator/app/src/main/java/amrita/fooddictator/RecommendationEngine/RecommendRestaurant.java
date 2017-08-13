@@ -22,14 +22,26 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * Created by amritachowdhury on 8/9/17.
  */
+/*
+* Functionalities
+* 1. Default Recommendation:
+* If the food dictator has no restaurant category (medeterranean, indian etc) that he earlier selected,
+* give a default list of restaurants based on the location specified. Return NUMBER_OF_DEFAULT_RESTAURANT_RESULTS restaurants
+*
+* 2. Custom Recommendation:
+* If the food dictator has some restaurant category that he earlier selected, then return list of
+* restaurants based on his top 3 cuisines (frequency of visits). Return NUMBER_OF_CUSTOM_RESTAURANT_RESULTS restaurants. Also
+* return NUMBER_OF_DEFAULT_RESTAURANT_RESULTS - NUMBER_OF_CUSTOM_RESTAURANT_RESULTS default recommendations. The default
+* recommendation is added so that he gets some restaurants recommendations that are not of the top 3
+* cuisines he frequently visits.
+* */
+
 
 public class RecommendRestaurant {
     private RecommendationActivity activity;
     public YelpAccessTokenAPI tokenAPI;
     public YelpSearchAPI searchAPI;
     List<Restaurant> recommendedRestaurants;
-
-    public RecommendRestaurant() {};
 
     public RecommendRestaurant(RecommendationActivity activity) {
         try {

@@ -7,10 +7,15 @@ import android.webkit.WebView;
 /**
  * Created by amritachowdhury on 8/11/17.
  */
+/*
+* Functionalities of the screen
+* 1. Displays the google page for the selected restaurant from the list of recommended restaurants.
+* */
 
 public class WebViewActivity extends AppCompatActivity {
     private WebView webView;
     private String webUrl;
+    private static final String BASE_URL = "https://www.google.com/search?q=";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,9 +27,15 @@ public class WebViewActivity extends AppCompatActivity {
     }
 
     private void readIntent() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(BASE_URL);
         if (getIntent().hasExtra("selectedRestaurantName")) {
-           webUrl = getIntent().getStringExtra("selectedRestaurantName");
-            webUrl = "http://www.google.com";
+           String restaurantName = getIntent().getStringExtra("selectedRestaurantName");
+            String[] splitted = restaurantName.split("\\s+");
+            for (String s : splitted) {
+                sb.append(s + "+");
+            }
+            webUrl = sb.toString();
         } else {
             throw new IllegalArgumentException("Activity cannot find  extras " + "selectedRestaurantName");
         }

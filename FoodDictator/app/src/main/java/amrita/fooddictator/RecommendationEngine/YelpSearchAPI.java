@@ -21,6 +21,10 @@ import cz.msebera.android.httpclient.message.BasicHeader;
 /**
  * Created by amritachowdhury on 8/9/17.
  */
+/*
+* Functionalities
+* 1. Gets the list of restaurants based on query params (location, recommended category) using yelp's V3 REST api
+* */
 
 public class YelpSearchAPI {
     public  List<Restaurant> recommendedRestaurants = new ArrayList<>();

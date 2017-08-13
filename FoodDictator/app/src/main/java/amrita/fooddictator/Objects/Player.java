@@ -14,6 +14,12 @@ import java.util.Map;
  * Created by amritachowdhury on 8/9/17.
  */
 
+/* Functionalities:
+1. This class contains the player details.
+2. Player has a id which is unique, a name and a list of his previous selections in the form of
+ map < no of times selected, cuisine>. Initially it is empty.
+* */
+
 public class Player implements Serializable {
     public int getId() {
         return id;

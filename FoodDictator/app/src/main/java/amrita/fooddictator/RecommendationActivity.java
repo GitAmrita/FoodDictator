@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -23,6 +24,14 @@ import amrita.fooddictator.RecommendationEngine.RecommendRestaurant;
 /**
  * Created by amritachowdhury on 8/10/17.
  */
+/*
+* Functionalities of the screen
+* 1. Displays the food dictator by a random pick from the selected players from the list of persistent players.
+* 2. Food dictator enters the location (city/ zip) of the neighborhood he wants to go to.
+* 3. Click the button to get the list of recommended restaurants.
+* 4. If there are no recommended restaurants, a toast is displayed.
+* 5. On pressing the back button, all selected players are reset.
+* */
 
 public class RecommendationActivity extends AppCompatActivity {
 
@@ -45,6 +54,14 @@ public class RecommendationActivity extends AppCompatActivity {
         readIntent();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent();
+        setResult(Config.RESET_PRESENT_PLAYERS_RESULT_CODE, intent);
+        finish();
+        super.onBackPressed();
+    }
+
     public void onClickRecommendBtn(View v) {
         Helper.hideKeyboard(this);
         recommendRestaurant.runRecommendation(foodDictator, restaurantZipCode.getText().toString());
@@ -52,22 +69,27 @@ public class RecommendationActivity extends AppCompatActivity {
 
 
     public void displayRecommendedRestaurants(List<Restaurant> recommendedRestaurants) {
-        this.restaurantRecommendationTitle.setVisibility(recommendedRestaurants.size() > 0
-                ? View.VISIBLE : View.GONE);
         spinner.setVisibility(View.GONE);
-        RestaurantAdapter playerAdapter = new RestaurantAdapter(this, recommendedRestaurants);
-        allRestaurantsList.setAdapter(playerAdapter);
-        allRestaurantsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view,
-                                    final int position, long id) {
-                TextView selectedCategory = (TextView) view.findViewById(R.id.restaurant_category);
-                TextView selectedName = (TextView) view.findViewById(R.id.restaurant_name);
-                lunchBuddySingleton.addFoodDictatorRecommendation(
-                        selectedCategory.getText().toString(), foodDictator);
-                sendIntent(selectedName.getText().toString());
-            }
-        });
+        if (recommendedRestaurants.size() == 0) {
+            this.restaurantRecommendationTitle.setVisibility(View.GONE);
+            Toast.makeText(this, "No restaurants found, please select another location",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            this.restaurantRecommendationTitle.setVisibility(View.VISIBLE);
+            RestaurantAdapter playerAdapter = new RestaurantAdapter(this, recommendedRestaurants);
+            allRestaurantsList.setAdapter(playerAdapter);
+            allRestaurantsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView parent, View view,
+                                        final int position, long id) {
+                    TextView selectedCategory = (TextView) view.findViewById(R.id.restaurant_category);
+                    TextView selectedName = (TextView) view.findViewById(R.id.restaurant_name);
+                    lunchBuddySingleton.addFoodDictatorRecommendation(
+                            selectedCategory.getText().toString(), foodDictator);
+                    sendIntent(selectedName.getText().toString());
+                }
+            });
+        }
     }
 
     private void initComponents() {
