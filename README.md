@@ -8,7 +8,7 @@ Food dictator is an app which allows one to select the players to play a game of
 
 3. Once the dictator clicks on the restaurant, a google map opens up for navigation.(3rd screen - google maps for the restaurant selected)
 
-Once the user clicks the hardware back button, the game is reset.
+4. Once the user clicks the hardware back button, the game is reset.
 
 # Recommendation Logic
 Each player in the app has a list of previously visited restaurant cuisine types which is initially empty. When a player is selected as the food dictator, he picks a restaurant from the recommended list. This adds the cuisine type to the list of previously visited restaurant cuisine types. 
