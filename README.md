@@ -1,5 +1,15 @@
 # FoodDictator
 
+Food dictator is an app which allows one to select the players to play a game of "Who's the food dictator for today's lunch".
+
+1. Once the players are selected, the app generates the food dictator of the day. (Home Screen)
+
+2. The dictator is asked to enter the location (zip/ city) where he wants to have lunch. Based on the location and the dictators previous restaurant picks, the app recommends a list of restaurants to select from.(2nd screen - restaurant recommendation)
+
+3. Once the dictator clicks on the restaurant, a google map opens up for navigation.(3rd screen - google maps for the restaurant selected)
+
+Once the user clicks the hardware back button, the game is reset.
+
 # Recommendation Logic
 Each player in the app has a list of previously visited restaurant cuisine types which is initially empty. When a player is selected as the food dictator, he picks a restaurant from the recommended list. This adds the cuisine type to the list of previously visited restaurant cuisine types. 
 The recommendation is done through Yelp Search api. There are following two types of recommendations.
