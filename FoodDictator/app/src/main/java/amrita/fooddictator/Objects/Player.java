@@ -17,7 +17,7 @@ import java.util.Map;
 /* Functionalities:
 1. This class contains the player details.
 2. Player has a id which is unique, a name and a list of his previous selections in the form of
- map < no of times selected, cuisine>. Initially it is empty.
+ map <cuisine, no of times selected>. Initially it is empty.
 * */
 
 public class Player implements Serializable {
