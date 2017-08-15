@@ -63,8 +63,12 @@ public class RecommendationActivity extends AppCompatActivity {
     }
 
     public void onClickRecommendBtn(View v) {
-        Helper.hideKeyboard(this);
-        recommendRestaurant.runRecommendation(foodDictator, restaurantZipCode.getText().toString());
+        if (restaurantZipCode.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Please enter a location to get recommendations", Toast.LENGTH_SHORT).show();
+        } else {
+            Helper.hideKeyboard(this);
+            recommendRestaurant.runRecommendation(foodDictator, restaurantZipCode.getText().toString());
+        }
     }
 
 
