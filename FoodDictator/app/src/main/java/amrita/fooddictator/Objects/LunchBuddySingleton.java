@@ -73,22 +73,23 @@ public class LunchBuddySingleton {
         if (presentPlayers.size() == 0) {
             return null;
         }
-        return getFoodDictator(presentPlayers);
+        else if (presentPlayers.size() == 1) {
+            lastWinner = presentPlayers.get(0).getName();
+            return presentPlayers.get(0);
+        } else {
+            return getFoodDictator(presentPlayers);
+        }
     }
 
     private Player getFoodDictator(List<Player> presentPlayers) {
-        if (presentPlayers.size() == 1) {
-            lastWinner = presentPlayers.get(0).getName();
-            return presentPlayers.get(0);
-        }
         Random rand = new Random();
         int randIdx = rand.nextInt(presentPlayers.size());
         if (lastWinner.equals(presentPlayers.get(randIdx).getName())) {
-            getFoodDictator();
+            return getFoodDictator(presentPlayers);
         } else {
             lastWinner = presentPlayers.get(randIdx).getName();
+            return presentPlayers.get(randIdx);
         }
-         return presentPlayers.get(randIdx);
     }
 
     public void addFoodDictatorRecommendation(String category, Player foodDictator) {
